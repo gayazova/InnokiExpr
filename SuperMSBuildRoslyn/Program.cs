@@ -16,11 +16,44 @@ namespace SuperMsBuildRoslyn
 
         public static void Main(string[] args)
         {
-            //CreateProject("newProj");
+            //CreateProject("newPro2");
             //AddToSln();
+
+            AddPackageReference();
             //AddDirectBuildProps();
             Console.ReadKey();
         }
+
+        private static void AddProjectToProjectReference()
+        {
+            try
+            {
+                RoslynMsBuildAttempt.RegisterLocatorInstance();
+                var projName1 = @"C:\Users\ASUS\source\repos\SlnExpr\newProj\newProj.csproj";
+                var projName2 = @"C:\Users\ASUS\source\repos\SlnExpr\newPro2\newPro2.csproj";
+                var aa = new AddProjectToProjectReferenceCommand(projName1, new() { projName2 });
+                aa.Execute();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
+
+        //private static void AddPackageReference()
+        //{
+        //    try
+        //    {
+        //        RoslynMsBuildAttempt.RegisterLocatorInstance();
+        //        var projName1 = @"C:\Users\ASUS\source\repos\SlnExpr\newProj\newProj.csproj";
+        //        var aa = new AddPackageReferenceCommand(projName1, "linq2db");
+        //        aa.Execute();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine(ex);
+        //    }
+        //}
 
         private static void AddToSln()
         {
@@ -28,7 +61,7 @@ namespace SuperMsBuildRoslyn
             {
                 RoslynMsBuildAttempt.RegisterLocatorInstance();
                 var slnFolder = @"C:\Users\ASUS\source\repos\SlnExpr";
-                var projName = @"C:\Users\ASUS\source\repos\SlnExpr\newProj\newProj.csproj";
+                var projName = @"C:\Users\ASUS\source\repos\SlnExpr\newPro2\newPro2.csproj";
                 var aa = new AddProjectToSolutionCommand(slnFolder, true, null, projName);
                 aa.Execute();
             }
