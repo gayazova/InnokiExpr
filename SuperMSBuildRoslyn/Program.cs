@@ -1,4 +1,5 @@
 ﻿using Microsoft.Build.Construction;
+using NuGet;
 using SuperMSBuildRoslyn;
 using SuperMSBuildRoslyn.Sdk;
 using System;
@@ -16,12 +17,26 @@ namespace SuperMsBuildRoslyn
 
         public static void Main(string[] args)
         {
+            NugetApi.Metadata().GetAwaiter().GetResult();
+            var date = DateTime.Now;
+            var dateUtc = date.ToUniversalTime();
+            Console.WriteLine(date);
+            Console.WriteLine(dateUtc);
             //CreateProject("newPro2");
             //AddToSln();
 
-            AddPackageReference();
+            //AddPackageReference();
             //AddDirectBuildProps();
             Console.ReadKey();
+        }
+
+        private static void NugetPackages()
+        {
+            //ID of the package to be looked up 
+            string packageID = "EntityFramework";
+
+            //Connect to the official package repository 
+            var repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
         }
 
         private static void AddProjectToProjectReference()
